@@ -62,7 +62,7 @@ function MyDropzone({onFileUploaded}) {
 //Main page
 const MakePlaylist = () => {
   const token = useSelector(state => state.auth.token)
-  const login = useSelector(state => state.auth.payload.sub.login)
+  const login = useSelector(state => state.auth.payload?.sub?.login)
   return (
     <div style={{margin:"10px"}}>
     {token ? <Link to={`/${login}/createplaylist`}>Create playlist</Link> : null}
@@ -251,7 +251,7 @@ const ShowPlaylist = () => {
   const dispatch = useDispatch()
   const {isLoading, data} = usePlaylistFindOneQuery({_id: id})
   const [index, setIndex] = useState(0)
-  const trackUrl = useSelector(state=> state.player.track.url)
+  const trackUrl = useSelector(state=> state.player?.track?.url)
   const login = useSelector(state => state.auth.payload.sub.login)
   const ownerLogin = data?.PlaylistFindOne?.owner?.login
   useEffect(() => {
@@ -279,7 +279,7 @@ const ShowPlaylist = () => {
 
 const PlaylistCart = () => {
   const {isLoading, data} = usePlaylistFindQuery()
-  const userId = useSelector(state => state.auth.payload.sub.id)
+  const userId = useSelector(state => state.auth.payload?.sub?.id)
   const {isLoading1, data: data1} = useFindMyPlaylistsQuery({_id: userId})
   const location = useLocation()
   const pathName = location.pathname === '/myplaylists'
